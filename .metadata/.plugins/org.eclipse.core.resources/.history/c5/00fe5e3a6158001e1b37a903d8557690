@@ -1,0 +1,101 @@
+package view;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import controller.CarController;
+import controller.RentController;
+import rent.Car;
+
+public class RentMenu {
+
+	private Scanner sc = new Scanner(System.in);
+	
+	private RentController ca = new RentController();
+	private CarController mc = new CarController();
+	
+	public void SubMenu() {
+		while(true) {
+		System.out.println("=============대여 반납 메뉴=================");
+		System.out.println("1. 차량 대여");
+		System.out.println("2. 차량 반납");
+		System.out.println("3. 보여줘 ");
+		System.out.println("0. 메인메뉴로 돌아가기");
+		
+		System.out.println("원하시는 번호를 선택하시오 :");
+		int num = sc.nextInt();
+		sc.nextLine();
+		
+		switch (num) {
+			case 1:		// 차량 대여
+				mc.PrintCar();
+				Rent();
+				break;
+			case 2:		// 차량 반납
+				mc.PrintCar();
+				RetunCar();
+				break;
+			case 3:		// 보여줘
+				mc.PrintCar();
+				break;
+			
+			case 0:		// 메인메뉴로 돌아가기
+				System.out.println("메인메뉴로 이동중 ;)");
+				return;
+				
+			default:
+				System.out.println("메뉴를 잘못 입력하셨습니다. 다시입력해주세요.");
+			}
+		}
+	}
+	
+	public void Rent() {
+		System.out.println("==========================================");
+		System.out.println("대여할 차량 번호를 입력하시오 : ");
+		int rentNum = sc.nextInt();
+		sc.nextLine();
+		
+		ca.Rent(rentNum);
+	}
+	
+	
+	public void RetunCar() {
+		System.out.println("==========================================");
+		System.out.println("반납할 차량 번호를 입력하시오 : ");
+		int rentNum = sc.nextInt();
+		sc.nextLine();
+		
+		ca.RetunCar(rentNum);
+	}
+	
+	
+	
+	
+	
+	// --------------------- 응답 화면 ----------------------------------
+	
+		public void displaySuccess(String message) {
+			System.out.println("\n서비스 요청 성공 : " + message);
+		}
+		
+		public void displayFail(String message) {
+			System.out.println("\n" + message);
+		}
+		
+		public void displayNoData(String message) {
+			System.out.println("\n" + message);
+		}
+		
+		public void displayMemberList(ArrayList<Car> list) {
+			System.out.println("조회된 데이터는 다음과 값습니다.");
+			
+			for(Car r : list) {
+				System.out.println(r);
+			}
+		}
+		
+		public void displayRent(Car r) {
+			System.out.println("조회된 데이터는 다음과 값습니다.");
+			System.out.println(r);
+		}
+}

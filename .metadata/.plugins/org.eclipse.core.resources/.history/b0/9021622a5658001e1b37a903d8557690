@@ -1,0 +1,9 @@
+package main;
+
+public class RentRun {
+	public static void main(String[] args) {
+		
+		new RentMenu().SubMenu();
+		
+	}
+}

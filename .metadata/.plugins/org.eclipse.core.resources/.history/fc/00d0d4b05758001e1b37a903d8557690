@@ -1,0 +1,10 @@
+package main;
+
+import view.CarMenu;
+
+public class CarRun {
+	public static void main(String[] args) {
+		
+		new CarMenu().MainMenu();
+	}
+}

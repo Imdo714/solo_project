@@ -1,0 +1,146 @@
+package view;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import controller.CarController;
+import rent.Car;
+
+public class CarMenu {
+
+	private Scanner sc = new Scanner(System.in);
+	
+	private CarController mc = new CarController();
+	
+	public void MainMenu() {
+		while(true) {
+		System.out.println("=============차량 메뉴=================");
+		System.out.println("1. 차량 등록");
+		System.out.println("2. 전체 차량 조회");
+		System.out.println("3. 차량 검색");
+		System.out.println("4. 차량 정보 변경");
+		System.out.println("5. 차량 삭제");
+		System.out.println("0. 메인메뉴로 돌아가기");
+		
+		System.out.println("원하시는 번호를 선택하시오 :");
+		int num = sc.nextInt();
+		sc.nextLine();
+		
+		switch (num) {
+			case 1:			// 차량 등록
+				inputCar();
+				break;
+			case 2:			// 전체 차량 조회 
+				mc.PrintCar();
+				break;
+			case 3:
+//				String rentCar = whatCar();
+//				mc.SccCar(rentCar);
+				
+				mc.SccCar(whatCar()); // 차량 검색
+				break;
+			case 4:			// 정보 변경
+				update();
+				break;
+			case 5:			// 차량 삭제 
+				mc.delete(whatCar());
+				break;
+			case 0:		// 메인메뉴로 돌아가기
+				System.out.println("메인메뉴로 이동 ;)");
+				return;
+			default:
+				System.out.println("메뉴를 잘못 입력하셨습니다. 다시입력해주세요.");
+			}
+		}
+	}
+	
+	public void inputCar() {
+		
+		System.out.print("차량회사 등록 :");
+		String rentName = sc.nextLine();
+		
+		System.out.print("차량년도 등록 :");
+		String rentNo = sc.nextLine();
+		
+		System.out.print("차량이름 등록 :");
+		String rentCar = sc.nextLine();
+		
+		System.out.print("차량 가격 등록 :");
+		int rentPrice = sc.nextInt();
+		sc.nextLine();
+		
+		System.out.print("차량 최고 속도 등록 :");
+		String maxSped = sc.nextLine();
+		
+		System.out.print("차량 대여여부(Y/N) :");
+		String rentYN = sc.nextLine();
+		
+		mc.inputCar(rentName, rentNo, rentCar, rentPrice, maxSped, rentYN);
+	}
+	
+	
+	public String whatCar() {
+		System.out.print("\n차량 이름을 입력하시오 :");
+		return sc.nextLine();
+	}
+	
+	public void update() {
+		System.out.println("차량 정보 변경");
+		
+		//String rentCar = whatCar();
+		
+		System.out.println("변경할 차량 번호 :");
+		int rentNum = sc.nextInt();
+		sc.nextLine();
+		
+//		System.out.println("변경할 차량 가격 :");
+//		int rentPrice = sc.nextInt();
+//		sc.nextLine();
+		
+		if(sc.hasNextInt()) {
+			System.out.println("변경할 차량 가격 :");
+			int rentPric = sc.nextInt();
+			sc.nextLine();
+		} else {
+			System.out.println("숫자를 입력해주세요.");
+		}
+		
+		System.out.println("변경할 차량 최고 속도 :");
+		String maxSped = sc.nextLine();
+		
+		mc.update(rentNum, rentPrice, maxSped);
+		
+		
+	}
+	
+	
+	
+	
+	// --------------------- 응답 화면 ----------------------------------
+	
+	public void displaySuccess(String message) {
+		System.out.println("\n서비스 요청 성공 : " + message);
+	}
+	
+	public void displayFail(String message) {
+		System.out.println("\n" + message);
+	}
+	
+	public void displayNoData(String message) {
+		System.out.println("\n" + message);
+	}
+	
+	public void displayMemberList(ArrayList<Car> list) {
+		System.out.println("조회된 데이터는 다음과 값습니다.");
+		System.out.println("차량번호 \t 회사 \t 년도 \t 이름 \t 가격 \t 최고속도 \t 대여여부");
+		
+		for(Car r : list) {
+			System.out.println(r);
+		}
+	}
+	
+	public void displayRent(Car r) {
+		System.out.println("조회된 데이터는 다음과 값습니다.");
+		System.out.println(r);
+	}
+}
